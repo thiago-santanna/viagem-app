@@ -1,6 +1,7 @@
 package com.tsswebapps.reserva;
 
 import com.tsswebapps.cliente.Cliente;
+import com.tsswebapps.cliente.ClienteService;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import javax.inject.Inject;
@@ -16,12 +17,17 @@ public class ReservaResource {
     @RestClient
     ReservaService reservaService;
 
+    @Inject
+    @RestClient
+    ClienteService clienteService;
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("newReserva")
     public String testaNewReserva(){
-        Cliente cliente = Cliente.of(1, "");
-        String response = reservaService.testaNewReserva(cliente);
+        Cliente cliente = clienteService.findById(1);
+        Reserva reserva = Reserva.of(cliente);
+        String response = reservaService.testaNewReserva(reserva);
         return response;
     }
 }

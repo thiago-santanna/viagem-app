@@ -15,5 +15,5 @@ public interface ReservaService {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public String testaNewReserva(Cliente cliente);
+    public String testaNewReserva(Reserva reserva);
 }
